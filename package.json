@@ -1,7 +1,7 @@
 {
   "name": "aedesbrokers",
   "version": "1.0.0",
-  "description": "aede mqtt broker with redis persistance",
+  "description": "aedes mqtt broker with redis persistance",
   "main": "aedesWebsocketRedis.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -12,5 +12,11 @@
     "websocket"
   ],
   "author": "DJR / ravenOSS",
-  "license": "ISC"
+  "license": "AGPL-3.0-or-later",
+  "dependencies": {
+    "aedes": "^0.35.3",
+    "aedes-persistence-redis": "^6.0.0",
+    "mqemitter-redis": "^3.0.0",
+    "websocket-stream": "^5.1.2"
+  }
 }
