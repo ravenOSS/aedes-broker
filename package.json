@@ -1,0 +1,16 @@
+{
+  "name": "aedesbrokers",
+  "version": "1.0.0",
+  "description": "aede mqtt broker with redis persistance",
+  "main": "aedesWebsocketRedis.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "mqtt",
+    "redis",
+    "websocket"
+  ],
+  "author": "DJR / ravenOSS",
+  "license": "ISC"
+}
