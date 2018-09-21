@@ -40,7 +40,7 @@ let httpServer = require('http').createServer();
 let ws = require('websocket-stream');
 
 server.listen(config.mqtt_port, function () {
-  console.log('MQTT server listening on port', config.mqtt_port);
+  console.log('MQTT server listening on port: [$config.mqtt_port]');
 });
 
 ws.createServer({ server: httpServer }, aedes.handle);
@@ -54,37 +54,44 @@ httpServer.listen(config.ws_port, function () {
 //   servers: servers
 // });
 
-aedes.on('client', function (client) {
-  console.log('new client', client.id);
+aedes.on('client', client => {
+  console.log(`Client [${client.id}] connected`);
 });
 
-aedes.on('connackSent', function (client) {
-  console.log('sent connack to %s', client.id);
+aedes.on('clientDisconnect', client => {
+  console.log(`Client [${client.id}] disconnected`);
 });
 
-aedes.on('clientError', function (client, err) {
-  console.log('client error', client.id, err.message, err.stack);
+aedes.on('clientError', (client, err) => {
+  console.log(`Client [${client.id}] encountered error: ${JSON.stringify(err)}`);
 });
 
-aedes.on('connectionError', function (client, err) {
-  console.log('client error: client: %s, error: %s', client.id, err.message);
+aedes.on('publish', (packet, client) => {
+  client ? console.log(`Client [${client.id}] published on ${packet.topic}: ${packet.payload}`)
+    : console.log(`aedes published on ${packet.topic}: ${packet.payload}`);
 });
 
-aedes.on('publish', function (packet, client) {
-  if (client) {
-    console.log('%s : topic %s : %s', client.id, packet.topic, packet.payload);
-  }
+aedes.on('subscribe', (subscriptions, client) => {
+  var subscriptionArr = subscriptions.map(subscription => {
+    return `${subscription['topic']} (${subscription['qos']})`;
+  });
+  client ? console.log(`Client [${client.id}] subscribed ${subscriptionArr}`)
+    : console.log(`aedes subscribed ${subscriptionArr.topic}: ${subscriptionArr.payload}`);
+});
+
+aedes.on('unsubscribe', (unsubscriptions, client) => {
+  console.log(`Client [${client.id}] unsubscribe ${unsubscriptions}`);
 });
 
 aedes.on('ack', function (message, client) {
   console.log('%s ack\'d message', client.id);
 });
 
-aedes.on('subscribe', function (subscriptions, client) {
-  if (client) {
-    console.log('%s subscribe %s', subscriptions, client.id);
-  }
-});
+// aedes.on('subscribe', function (subscriptions, client) {
+//   if (client) {
+//     console.log('%s subscribe %s', subscriptions, client.id);
+//   }
+// });
 
 aedes.on('clientDisconnect', function (client) {
   console.log('%s disconnected', client.id);

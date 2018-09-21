@@ -1,5 +1,5 @@
 let config = {
-  mqtt_port: 1883,
+  mqtt_port: 2883,
   ws_port: 8880,
   redis_port: 6379,
   redis_host: '192.168.0.101',
