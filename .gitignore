@@ -69,6 +69,9 @@ build/Release
 node_modules/
 jspm_packages/
 
+# Keep redis server out of repo
+redis-server
+
 # TypeScript v1 declaration files
 typings/
 
@@ -116,4 +119,3 @@ typings/
 # End of https://www.gitignore.io/api/macos,visualstudiocode,node
 
 # Custom rules (everything added below won't be overriden by 'Generate .gitignore File' if you use 'Update' option)
-
