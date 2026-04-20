@@ -14,9 +14,9 @@
 	"author": "DJR / ravenOSS",
 	"license": "MIT",
 	"dependencies": {
-		"aedes": "^0.35.3",
-		"aedes-persistence-redis": "^6.0.0",
-		"mqemitter-redis": "^3.0.0",
-		"websocket-stream": "^5.1.2"
+		"aedes": "^0.51.3",
+		"aedes-persistence-redis": "^10.0.0",
+		"mqemitter-redis": "^7.0.0",
+		"websocket-stream": "5.3.0"
 	}
 }
